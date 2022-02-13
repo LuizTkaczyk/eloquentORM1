@@ -12,7 +12,7 @@
 <body>
 
 <div class="container my-5">
-    <form action="" method="post" autocomplete="off">
+    <form action="{{ route('posts.store')}}" method="post" autocomplete="off">
 
         @csrf
 
@@ -31,7 +31,7 @@
             <input type="text" class="form-control" id="description" name="description">
         </div>
 
-        <button class="btn btn-primary">Enviar!</button>
+        <button class="btn btn-primary">Salvar!</button>
     </form>
 </div>
 

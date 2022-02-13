@@ -14,8 +14,8 @@
 <body>
 
     <div class="container my-5">
-        <a href="{{route('posts.create')}}" class="btn btn-success mb-5">Cadastrar novo artigo</a>
-        <a href="{{route('posts.trashed')}}" class="btn btn-danger mb-5">Ver lixeira</a>
+        <a href="{{ route('posts.create') }}" class="btn btn-success mb-5">Cadastrar novo artigo</a>
+        <a href="{{ route('posts.index') }}" class="btn btn-secondary mb-5">Ver todos</a>
         <?php
         if(!empty($posts)){
 
@@ -29,14 +29,16 @@
                 <h1>{{ $post->title }}</h1>
                 <h2>{{ $post->subtitle }}</h2>
                 <p>{{ $post->description }}</p>
-                <small>Criado em: {{ date('d-m-Y' , strtotime($post->created_at) )   }} - Editado em: {{date('d-m-Y', strtotime($post->updated_at )) }} </small>
-               
-                
-                <form action="{{ route('posts.destroy', ['id' =>$post->id])}}" method="POST" class="mt-3">
+                <small>Criado em: {{ date('d-m-Y', strtotime($post->created_at)) }} - Editado em:
+                    {{ date('d-m-Y', strtotime($post->updated_at)) }} </small>
+
+
+                <form action="{{ route('posts.forceDelete', ['id' => $post->id]) }}" method="POST"
+                    class="mt-3">
                     @csrf
                     @method('DELETE')
-                    <a href="{{route('posts.edit', ['id' =>$post->id])}}" class="btn btn-primary">Editar post</a>
-                    <button type="submit" class="btn btn-danger">Excluir post</button>
+                    <a href="{{ route('posts.restore', ['id' => $post->id]) }}" class="btn btn-primary">Restaurar post</a>
+                    <button type="submit" class="btn btn-danger">Excluir post para sempre</button>
 
                 </form>
             </article>
